@@ -1,0 +1,13 @@
+﻿using Tasktracker.Domain.Interfaces;
+
+namespace Tasktracker.Domain.Entities
+{
+    public class TTask : IEntity
+    {
+        public Guid Id { get; set; }
+        public required string Title { get; set; }
+        public bool IsDone { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+    }
+}
