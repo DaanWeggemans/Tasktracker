@@ -6,6 +6,8 @@ namespace Tasktracker.Application.DTOs.Task
     {
         [Required, MinLength(3)]
         public required string Title { get; set; }
+        [Required]
+        public required string Description { get; set; }
         public bool? IsDone { get; set; }
     }
 }

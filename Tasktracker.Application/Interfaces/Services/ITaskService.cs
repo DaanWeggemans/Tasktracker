@@ -1,5 +1,4 @@
 ﻿using Tasktracker.Application.DTOs.Task;
-using Tasktracker.Domain.Entities;
 
 namespace Tasktracker.Application.Interfaces.Services
 {
@@ -7,5 +6,9 @@ namespace Tasktracker.Application.Interfaces.Services
     {
         Task<TaskDTO?> GetLatestTaskAsync();
         Task<TaskListDTO> CreateTaskAsync(TaskCreateRequest request);
+        Task<TaskDTO> UpdateTaskDescriptionAsync(TaskEditDescriptionRequest request);
+        Task<TaskDTO> SetTaskCompletedAsync(TaskSetCompletedRequest request);
+        Task DeleteTaskAsync(TaskDeleteRequest request);
+        Task<List<TaskListDTO>> GetCompletedTasksAsync();
     }
 }

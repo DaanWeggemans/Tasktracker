@@ -8,10 +8,10 @@ using Tasktracker.Infrastructure.Persistence;
 
 #nullable disable
 
-namespace Tasktracker.Infrastructure.Persistence.Migrations
+namespace Tasktracker.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20260424124412_AddedTask")]
+    [Migration("20260522105443_AddedTask")]
     partial class AddedTask
     {
         /// <inheritdoc />
@@ -27,6 +27,10 @@ namespace Tasktracker.Infrastructure.Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsDone")

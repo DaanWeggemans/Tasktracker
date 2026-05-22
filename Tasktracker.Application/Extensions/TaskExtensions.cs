@@ -11,6 +11,7 @@ namespace Tasktracker.Application.Extensions
             {
                 Id = Guid.NewGuid(),
                 Title = request.Title,
+                Description = request.Description,
                 IsDone = request.IsDone ?? false
             };
         }
@@ -21,6 +22,7 @@ namespace Tasktracker.Application.Extensions
             {
                 Id = task.Id,
                 Title = task.Title,
+                Description = task.Description,
                 IsDone = task.IsDone,
                 CreatedAt = task.CreatedAt,
                 UpdatedAt = task.UpdatedAt

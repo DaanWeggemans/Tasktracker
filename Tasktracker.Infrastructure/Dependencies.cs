@@ -33,6 +33,7 @@ namespace Tasktracker.Infrastructure
         private static IServiceCollection RegisterRepositories(this IServiceCollection services)
         {
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<ITaskRepository, TaskRepository>();
 
             return services;
         }

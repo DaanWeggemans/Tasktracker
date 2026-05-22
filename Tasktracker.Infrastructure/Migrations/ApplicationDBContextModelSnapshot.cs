@@ -7,7 +7,7 @@ using Tasktracker.Infrastructure.Persistence;
 
 #nullable disable
 
-namespace Tasktracker.Infrastructure.Persistence.Migrations
+namespace Tasktracker.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
     partial class ApplicationDBContextModelSnapshot : ModelSnapshot
@@ -24,6 +24,10 @@ namespace Tasktracker.Infrastructure.Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsDone")
