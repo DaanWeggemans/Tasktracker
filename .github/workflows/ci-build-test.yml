@@ -14,27 +14,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. PHP instellen
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      # 2. .NET instellen
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
         with:
-          php-version: '8.2'
-          tools: composer
-          coverage: none
+          dotnet-version: '10.0.x'
 
-      # 3. Dependencies installeren
-      - name: Install dependencies
-        run: composer install --no-interaction --prefer-dist
+      # 3. Dependencies herstellen
+      - name: Restore dependencies
+        run: dotnet restore
 
-      # 4. Run dump-autoload
-      - name: Dump autoload
-        run: composer dump-autoload
+      # 4. Project bouwen
+      - name: Build project
+        run: dotnet build --no-restore --configuration Release
 
       # 5. Tests draaien (CI) + output naar bestand
       - name: Run tests
         run: |
           mkdir -p test-results
-          composer test -- --log-junit test-results/junit.xml
+          dotnet test --no-build --configuration Release --logger "junit;LogFilePath=../test-results/junit.xml"
 
       # 6. Upload testresultaten als artifact
       - name: Upload test results
