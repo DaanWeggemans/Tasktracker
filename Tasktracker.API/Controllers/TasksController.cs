@@ -4,7 +4,7 @@ using Tasktracker.Application.Interfaces.Services;
 
 namespace Tasktracker.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class TasksController : ControllerBase
     {

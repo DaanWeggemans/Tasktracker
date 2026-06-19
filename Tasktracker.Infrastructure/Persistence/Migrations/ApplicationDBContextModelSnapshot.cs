@@ -7,7 +7,7 @@ using Tasktracker.Infrastructure.Persistence;
 
 #nullable disable
 
-namespace Tasktracker.Infrastructure.Migrations
+namespace Tasktracker.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
     partial class ApplicationDBContextModelSnapshot : ModelSnapshot
@@ -43,6 +43,32 @@ namespace Tasktracker.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tasks");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("19c8b5fe-81b3-46c7-a06b-9577d33245bf"),
+                            CreatedAt = new DateTime(2026, 6, 5, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Creating an Docker image.",
+                            IsDone = false,
+                            Title = "Create image."
+                        },
+                        new
+                        {
+                            Id = new Guid("00177286-b887-4bf3-bdba-315639370345"),
+                            CreatedAt = new DateTime(2026, 6, 5, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Downloading Docker.",
+                            IsDone = true,
+                            Title = "Download Docker."
+                        },
+                        new
+                        {
+                            Id = new Guid("4d152292-03bd-4d7c-890d-f1a27c4065fb"),
+                            CreatedAt = new DateTime(2026, 6, 5, 15, 30, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Creating a docker-compose.yml file.",
+                            IsDone = false,
+                            Title = "Create docker-compose."
+                        });
                 });
 #pragma warning restore 612, 618
         }

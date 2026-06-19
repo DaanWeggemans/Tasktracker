@@ -1,0 +1,45 @@
+name: CI + build only
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Haal de code op
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. PHP instellen
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer
+          coverage: none
+
+      # 3. Dependencies installeren
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      # 4. Run dump-autoload
+      - name: Dump autoload
+        run: composer dump-autoload
+
+      # 5. Tests draaien (CI) + output naar bestand
+      - name: Run tests
+        run: |
+          mkdir -p test-results
+          composer test -- --log-junit test-results/junit.xml
+
+      # 6. Upload testresultaten als artifact
+      - name: Upload test results
+        if: always() # ook uploaden als tests falen
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: test-results

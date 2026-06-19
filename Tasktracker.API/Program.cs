@@ -1,6 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
 using Tasktracker.Application;
 using Tasktracker.Infrastructure;
+using Tasktracker.Infrastructure.Persistence;
 
 namespace Tasktracker.API
 {
@@ -24,7 +26,21 @@ namespace Tasktracker.API
                 });
             });
 
+            builder.Services.AddCors(options =>
+                options.AddDefaultPolicy(option =>
+                {
+                    option.AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowAnyOrigin();
+                }));
+
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<ApplicationDBContext>();
+                context.Database.Migrate();
+            }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -44,6 +60,7 @@ namespace Tasktracker.API
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
+            app.UseCors();
 
 
             app.MapControllers();
